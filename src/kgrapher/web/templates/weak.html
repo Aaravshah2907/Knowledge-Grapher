@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weak Links</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 0.5rem; border-bottom: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <h1>Weak Links</h1>
+  <a href="/">&larr; Home</a>
+  {% if not weak %}
+  <p>No weak links detected yet. Complete some reviews first.</p>
+  {% else %}
+  <table>
+    <thead>
+      <tr><th>Concept</th><th>Accuracy</th><th>Reviews</th><th>Centrality</th></tr>
+    </thead>
+    <tbody>
+      {% for row in weak %}
+      <tr>
+        <td>{{ row.title }} ({{ row.id }})</td>
+        <td>{{ "%.0f"|format(row.accuracy * 100) }}%</td>
+        <td>{{ row.reviews }}</td>
+        <td>{{ "%.3f"|format(row.centrality) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</body>
+</html>

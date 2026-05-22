@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Review</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
+    .card { background: #f4f4f5; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; }
+    .grades button { margin: 0.25rem; padding: 0.5rem 0.75rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Review</h1>
+  <a href="/">&larr; Home</a>
+  <p>Remaining due: {{ remaining }}</p>
+  {% if card %}
+  <div class="card">
+    <strong>Front</strong>
+    <p>{{ card.front }}</p>
+    <details>
+      <summary>Reveal answer</summary>
+      <p>{{ card.back }}</p>
+    </details>
+  </div>
+  <form method="post" class="grades">
+    <input type="hidden" name="card_id" value="{{ card.id }}">
+    {% for g in range(6) %}
+    <button type="submit" name="grade" value="{{ g }}">{{ g }}</button>
+    {% endfor %}
+  </form>
+  {% else %}
+  <p>No cards due. Great work!</p>
+  {% endif %}
+</body>
+</html>

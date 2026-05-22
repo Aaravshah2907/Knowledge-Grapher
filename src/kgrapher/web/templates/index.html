@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Knowledge Grapher</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
+    .stat { font-size: 1.25rem; margin: 0.5rem 0; }
+    nav a { margin-right: 1rem; }
+    button { padding: 0.5rem 1rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Knowledge Grapher</h1>
+  <p class="stat">Concepts: {{ concepts }}</p>
+  <p class="stat">Cards: {{ cards }}</p>
+  <p class="stat">Due now: {{ due }}</p>
+  <nav>
+    <a href="/review">Review</a>
+    <a href="/graph">Graph</a>
+    <a href="/weak">Weak links</a>
+  </nav>
+  <form action="/scan" method="post" style="margin-top: 2rem;">
+    <button type="submit">Scan notes vault</button>
+  </form>
+</body>
+</html>
