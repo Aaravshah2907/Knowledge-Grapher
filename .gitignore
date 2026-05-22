@@ -1,3 +1,4 @@
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -8,11 +9,26 @@ build/
 .venv/
 venv/
 .env
-*.db
+
+# Local app state (config + SQLite live in ~/.kgrapher/ by default)
 .kgrapher/
+*.db
+
+# Test / lint caches
 .pytest_cache/
 .ruff_cache/
 htmlcov/
 .coverage
+
+# Generated graph exports (pyvis writes HTML + lib/ next to output path)
+lib/
+knowledge-graph.html
+my-graph.html
+*-graph.html
 *.html
 !src/kgrapher/web/templates/*.html
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

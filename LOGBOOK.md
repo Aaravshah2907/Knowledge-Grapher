@@ -47,3 +47,10 @@ Dated log of changes. One git commit per major feature where noted.
 - FastAPI local app: dashboard, scan, review, weak links, graph viewer
 - `kgrapher serve` binds `127.0.0.1` only (offline-first)
 - Commit: `feat(web): local review and graph viewer`
+
+## 2026-05-22 — Tooling and git hygiene
+
+- Expanded `.gitignore` for pyvis `lib/`, exported HTML, venv, `~/.kgrapher/`
+- Default `graph export` output moved to `~/.kgrapher/graph-export.html` (keeps repo clean)
+- Added `requirements.txt`, `scripts/setup.sh`, `scripts/run.sh`
+- Added `python -m kgrapher` entry point (`__main__.py`)

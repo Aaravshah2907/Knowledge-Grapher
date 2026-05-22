@@ -12,6 +12,8 @@ from rich.table import Table
 
 from kgrapher import __version__
 from kgrapher.config import DEFAULT_CONFIG_DIR, DEFAULT_CONFIG_PATH, AppConfig
+
+DEFAULT_GRAPH_HTML = DEFAULT_CONFIG_DIR / "graph-export.html"
 from kgrapher.graph.builder import build_edges, build_graph
 from kgrapher.graph.model import Edge, EdgeType, ParsedNote
 from kgrapher.services.cards import generate_cards
@@ -200,8 +202,8 @@ app.add_typer(graph_app, name="graph")
 @graph_app.command("export")
 def graph_export(
     output: Path = typer.Option(
-        Path("knowledge-graph.html"),
-        help="Output HTML path",
+        DEFAULT_GRAPH_HTML,
+        help="Output HTML path (default: ~/.kgrapher/graph-export.html)",
     ),
 ) -> None:
     """Export interactive graph to HTML."""

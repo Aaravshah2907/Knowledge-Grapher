@@ -14,40 +14,52 @@ Students studying subjects like stochastic calculus, advanced physics, or any fi
 
 ## Quick start
 
-### Install
+### Shell scripts (recommended)
 
 ```bash
 git clone https://github.com/yourusername/Knowledge-Grapher.git
 cd Knowledge-Grapher
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -e ".[dev]"
+chmod +x scripts/setup.sh scripts/run.sh
+
+# One-time setup — pass your markdown notes folder
+./scripts/setup.sh /path/to/your/notes
+# Example with bundled demo notes:
+./scripts/setup.sh examples/sample-notes
+
+# Scan → generate cards → start web UI
+./scripts/run.sh
 ```
 
-### Initialize
+### Manual install
 
-Point the tool at your Markdown vault:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+pip install -e ".[dev]"
+kgrapher version            # should print: kgrapher 0.1.0
+```
+
+If you see `kgrapher: command not found`, activate `.venv` or use:
+
+```bash
+.venv/bin/kgrapher version
+python3 -m kgrapher version
+```
+
+### CLI workflow
 
 ```bash
 kgrapher init /path/to/your/notes
+kgrapher scan
+kgrapher cards generate
+kgrapher review
+kgrapher weak
+kgrapher graph export          # writes ~/.kgrapher/graph-export.html by default
+kgrapher serve                 # http://127.0.0.1:8765
 ```
 
-Or try the bundled example corpus:
-
-```bash
-kgrapher init examples/sample-notes
-```
-
-### Workflow
-
-```bash
-kgrapher scan              # Parse notes, build graph, compute PageRank
-kgrapher cards generate    # Draft flashcards from titles + LaTeX
-kgrapher review            # Interactive recall session
-kgrapher weak              # Weak-link report
-kgrapher graph export -o my-graph.html
-kgrapher serve             # Local web UI at http://127.0.0.1:8765
-```
+Generated artifacts (`lib/`, `*-graph.html`, `.venv`, `~/.kgrapher/`) are gitignored and never committed.
 
 ## Authoring notes
 
