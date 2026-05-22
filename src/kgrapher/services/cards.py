@@ -3,9 +3,23 @@
 from __future__ import annotations
 
 from kgrapher.config import AppConfig
+from kgrapher.graph.model import ParsedNote
 from kgrapher.parser.scanner import scan_notes
 from kgrapher.storage.db import connect
 from kgrapher.storage.repository import Repository
+from kgrapher.web.math import wrap_display_math
+
+
+def pick_card_back(note: ParsedNote) -> str:
+    """Choose flashcard answer text: explicit frontmatter > first extracted formula."""
+    if note.card_formula:
+        return wrap_display_math(note.card_formula)
+    if note.formulas:
+        back = wrap_display_math(note.formulas[0])
+        if len(note.formulas) > 1:
+            back += f"\n\n(+{len(note.formulas) - 1} more formulas in notes)"
+        return back
+    return f"See note: {note.path.name}"
 
 
 def generate_cards(config: AppConfig, overwrite: bool = False) -> int:
@@ -20,13 +34,7 @@ def generate_cards(config: AppConfig, overwrite: bool = False) -> int:
         if existing and not overwrite:
             continue
         front = f"What is {note.title}?"
-        if note.formulas:
-            back = note.formulas[0]
-            if len(note.formulas) > 1:
-                back += f"\n\n(+{len(note.formulas) - 1} more formulas in notes)"
-        else:
-            back = f"See note: {note.path.name}"
-        repo.create_card(note.id, front, back)
+        repo.create_card(note.id, front, pick_card_back(note))
         created += 1
 
     return created

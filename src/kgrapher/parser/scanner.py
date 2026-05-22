@@ -31,6 +31,7 @@ def parse_note(path: Path) -> ParsedNote | None:
     )
     wikilinks = extract_wikilinks(body)
     formulas = extract_formulas(body)
+    card_formula = _card_formula_from_meta(meta)
 
     return ParsedNote(
         id=note_id,
@@ -41,8 +42,20 @@ def parse_note(path: Path) -> ParsedNote | None:
         depends_on=depends_on,
         wikilinks=wikilinks,
         formulas=formulas,
+        card_formula=card_formula,
         body=body,
     )
+
+
+def _card_formula_from_meta(meta: dict) -> str | None:
+    raw = meta.get("card_formula") or meta.get("key_formula")
+    if raw is None:
+        return None
+    if isinstance(raw, str):
+        text = raw.strip()
+    else:
+        text = str(raw).strip()
+    return text or None
 
 
 def build_id_index(notes: list[ParsedNote]) -> dict[str, ParsedNote]:

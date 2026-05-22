@@ -18,8 +18,10 @@ from kgrapher.srs.scheduler import apply_review, sort_due_cards
 from kgrapher.srs.sm2 import SM2State
 from kgrapher.storage.db import connect, init_db
 from kgrapher.storage.repository import Repository
+from kgrapher.web.math import prepare_math_html
 
 TEMPLATES = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
+TEMPLATES.env.filters["math_html"] = prepare_math_html
 
 
 def create_app(config: AppConfig) -> FastAPI:

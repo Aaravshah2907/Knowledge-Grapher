@@ -3,6 +3,8 @@ id: ito-lemma
 title: Itô's Lemma
 tags: [stochastic-calculus, sde]
 depends_on: [brownian-motion, stochastic-integral]
+# Optional: exact LaTeX for the flashcard back (otherwise first $$...$$ in body)
+card_formula: "df(t, X_t) = \\frac{\\partial f}{\\partial t}\\,dt + \\frac{\\partial f}{\\partial x}\\,dX_t + \\frac{1}{2}\\frac{\\partial^2 f}{\\partial x^2}\\,d[X]_t"
 ---
 # Itô's Lemma
 

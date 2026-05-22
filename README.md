@@ -80,6 +80,23 @@ Relates to [[brownian-motion]] and [[stochastic-integral]].
 $$dX_t = \mu_t\,dt + \sigma_t\,dW_t$$
 ```
 
+### Flashcard formula (optional)
+
+`kgrapher cards generate` picks the **card back** in this order:
+
+1. **`card_formula`** (or `key_formula`) in frontmatter — use this when you want a specific identity on the card
+2. Otherwise the **first `$$...$$` display equation** in the note body (in top-to-bottom order)
+3. Then any **`$...$` inline** math, if there are no display blocks
+4. If there is no math, `See note: <filename>`
+
+You do **not** need to reorder your whole note for a setup line like `$X_t$` before the main `$$` result — put the main result in the first `$$` block, or set `card_formula` explicitly:
+
+```yaml
+card_formula: "df(t,X_t) = \\frac{\\partial f}{\\partial t}\\,dt + \\cdots"
+```
+
+Regenerate after edits: `kgrapher cards generate --overwrite`
+
 | Source | Edge type | Used for |
 |--------|-----------|----------|
 | `depends_on` / `requires` in frontmatter | **Hard** dependency | PageRank, cascade on miss |

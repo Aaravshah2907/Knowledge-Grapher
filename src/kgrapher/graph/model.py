@@ -22,6 +22,7 @@ class ParsedNote:
     depends_on: list[str] = field(default_factory=list)
     wikilinks: list[str] = field(default_factory=list)
     formulas: list[str] = field(default_factory=list)
+    card_formula: str | None = None  # optional frontmatter override for flashcard back
     body: str = ""
 
 

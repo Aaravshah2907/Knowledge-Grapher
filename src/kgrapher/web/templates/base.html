@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Knowledge Grapher{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    nav a { margin-right: 1rem; }
+    .math-content { margin: 0.75rem 0; white-space: pre-wrap; word-break: break-word; }
+    .math-content .katex-display { margin: 1em 0; }
+    {% block extra_css %}{% endblock %}
+  </style>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  {% block body %}{% endblock %}
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof renderMathInElement === "function") {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true },
+          ],
+          throwOnError: false,
+          strict: false,
+        });
+      }
+    });
+  </script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
